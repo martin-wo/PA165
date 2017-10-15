@@ -17,8 +17,7 @@ import javax.persistence.TemporalType;
 @Table(name = "ESHOP_PRODUCTS")
 public class Product {
 
-	//TODO: column should be named identity
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Basic @Column(nullable = false, unique = true)
@@ -36,6 +35,10 @@ public class Product {
 	
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -61,4 +64,40 @@ public class Product {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((addedDate == null) ? 0 : addedDate.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Product))
+			return false;
+		Product other = (Product) obj;
+		if (addedDate == null) {
+			if (other.getAddedDate() != null)
+				return false;
+		} else if (!addedDate.equals(other.getAddedDate()))
+			return false;
+		if (color != other.getColor())
+			return false;
+		if (name == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!name.equals(other.getName()))
+			return false;
+		return true;
+	}
+	
 }
