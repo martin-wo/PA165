@@ -121,6 +121,17 @@ public class Task02 extends AbstractTestNGSpringContextTests {
 		assertContainsCategoryWithName(persistedProduct3.getCategories(), category2.getName());
 		em.close();
 	}
+
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void doesNotSaveNullNameTest() {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Product p = new Product();
+		em.persist(p);
+		em.getTransaction().commit();
+		
+		em.close();
+	}
 	
 	private void assertContainsCategoryWithName(Set<Category> categories,
 			String expectedCategoryName) {
