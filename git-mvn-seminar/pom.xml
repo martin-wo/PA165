@@ -23,7 +23,35 @@
 		<module>car-shop</module>
 	</modules>
 	
-	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+				    <groupId>org.jacoco</groupId>
+				    <artifactId>jacoco-maven-plugin</artifactId>
+				    <version>0.7.5.201505241946</version>
+				    <configuration>
+        				<argLine>${surefireArgLine}</argLine>
+				    </configuration>
+				    <executions>
+				        <execution>
+				            <id>pre-unit-test</id>
+				            <goals>
+				                <goal>prepare-agent</goal>
+				            </goals>
+				        </execution>
+				        <execution>
+				            <id>post-unit-test</id>
+				            <phase>test</phase>
+				            <goals>
+				                <goal>report</goal>
+				            </goals>
+				        </execution>
+				    </executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>	
 
 	<dependencyManagement>
 		<dependencies>
@@ -37,6 +65,13 @@
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-all</artifactId>
 				<version>${hamcrest.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>3.8.0</version>
+				<type>bundle</type>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
