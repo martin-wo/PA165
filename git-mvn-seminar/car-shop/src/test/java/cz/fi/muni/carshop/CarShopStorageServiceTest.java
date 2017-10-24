@@ -4,7 +4,6 @@ import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.assertj.core.api.Assertions.*;
 
 import java.awt.Color;
 import java.util.List;
@@ -87,13 +86,14 @@ public class CarShopStorageServiceTest {
 			e.printStackTrace();
 		}
 		
-		assertThat(CarShopStorage.getInstancce().getCars().get(CarTypes.BMW)).hasSize(2);
+		assertThat(CarShopStorage.getInstancce().getCars().get(CarTypes.BMW), hasSize(2));
 	}
 
 	@Test
-	public void testSellUnavailableCar() {
+	public void testSellUnavailableCar() throws RequestedCarNotFoundException {
 		Car bmw2016 = new Car(Color.RED, CarTypes.BMW, 2016, 900000);
 		
-		assertThatThrownBy(() -> service.sellCar(bmw2016)).isInstanceOf(RequestedCarNotFoundException.class);
+		thrown.reportMissingExceptionWithMessage("We expect exception on selling unavailable car").expect(RequestedCarNotFoundException.class);
+		service.sellCar(bmw2016);
 	}
 }
