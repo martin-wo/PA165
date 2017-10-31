@@ -10,9 +10,13 @@ import cz.muni.fi.pa165.currency.CurrencyConvertor;
 public class MainAnnotations {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext("cz.muni.fi.pa165");
-		CurrencyConvertor currencyConvertor = applicationContext.getBean(CurrencyConvertor.class);
-		BigDecimal result = currencyConvertor.convert(Currency.getInstance("EUR"), Currency.getInstance("CZK"), new BigDecimal(1));
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+				"cz.muni.fi.pa165.currency");
+		CurrencyConvertor currencyConvertor = applicationContext
+				.getBean(CurrencyConvertor.class);
+		BigDecimal result = currencyConvertor.convert(
+				Currency.getInstance("EUR"), Currency.getInstance("CZK"),
+				new BigDecimal(1));
 		System.out.println(result);
 	}
 
