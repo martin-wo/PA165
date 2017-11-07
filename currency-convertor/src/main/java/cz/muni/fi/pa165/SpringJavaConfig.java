@@ -13,7 +13,6 @@ import cz.muni.fi.pa165.currency.ExchangeRateTable;
 import cz.muni.fi.pa165.currency.ExchangeRateTableImpl;
 
 @Configuration
-@ComponentScan("cz.muni.fi.pa165")
 @EnableAspectJAutoProxy
 public class SpringJavaConfig {
 
