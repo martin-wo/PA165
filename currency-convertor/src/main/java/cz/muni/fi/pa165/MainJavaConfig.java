@@ -14,7 +14,7 @@ public class MainJavaConfig {
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
 				SpringJavaConfig.class);
 		CurrencyConvertor currencyConvertor = applicationContext
-				.getBean(CurrencyConvertor.class);
+				.getBean("currencyConvertor", CurrencyConvertor.class);
 		BigDecimal result = currencyConvertor.convert(
 				Currency.getInstance("EUR"), Currency.getInstance("CZK"),
 				new BigDecimal(1));

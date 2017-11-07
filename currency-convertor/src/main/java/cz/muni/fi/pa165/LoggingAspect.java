@@ -12,6 +12,7 @@ public class LoggingAspect {
     @Around("execution(public * *(..))")
     public Object logMethodCall(ProceedingJoinPoint joinPoint) throws Throwable {
 
+    	long start = System.currentTimeMillis();
         System.err.println("Calling method: "
                 + joinPoint.getSignature());
 
@@ -19,7 +20,8 @@ public class LoggingAspect {
 
         System.err.println("Method finished: "
                 + joinPoint.getSignature());
-
+        long elapsedTime = System.currentTimeMillis() - start;
+        System.err.println("Method execution time: " + elapsedTime + " milliseconds.");
         return result;
     }
 
